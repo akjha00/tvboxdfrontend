@@ -10,10 +10,15 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     if (token) {
       axios.get('/api/users/me', {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       })
-      .then(res => {setUser(res.data)})
-      .catch(() => logout());
+      .then(res => setUser(res.data))
+      .catch((err) => {
+        console.error("Auth request failed:", err.response?.data || err.message);
+        logout();
+      });
     }
   }, [token]);
 
@@ -23,7 +28,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    console.log("here");
     localStorage.removeItem('token');
     setToken('');
     setUser(null);

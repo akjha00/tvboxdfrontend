@@ -13,24 +13,18 @@ const RegisterForm = ({ onLogin }) => {
     e.preventDefault();
     try {
       const res = await axios.post('/api/users/register', form);
-      login(res.data.token);
+      onLogin(res.data.token);
       if (res.data.token) {
         // Immediately create profile
-        await fetch('/api/profile', {
-          method: 'POST',
+        await axios.post('/api/profile', {
+          username: res.data.username,
+          bio: 'No bio yet',
+          photo_url: '',
+        }, {
           headers: {
-            'Content-Type': 'application/json',
             Authorization: `Bearer ${res.data.token}`,
-          },
-          body: JSON.stringify({
-            username: res.data.username,
-            bio: 'No bio yet',
-            photo_url: '',
-          }),
+          }
         });
-    
-        // Optionally redirect or set auth context
-        onLogin(res.data.token); // your login handler
       }
     } catch (err) {
       console.log(err);

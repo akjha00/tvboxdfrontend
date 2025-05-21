@@ -48,7 +48,6 @@ export default function ShowPage() {
 
   async function fetchReviewsAgain(showId) {
     try {
-        console.log(showId);
       const res = await axios.get(`/api/ratings/show/${showId}`);
       setHasReviewed(true);
       return res.data; // array of reviews
@@ -89,7 +88,6 @@ export default function ShowPage() {
                 <AddReviewForm
                   showId={show.id}
                   onReviewAdded={() => {
-                    console.log(show.id);
                     setShowAddReview(false);
                     fetchReviewsAgain(show.id); // if you have a function to refresh reviews
                   }}

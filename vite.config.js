@@ -2,19 +2,20 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
-// https://vite.dev/config/
 export default defineConfig({
   build: {
     rollupOptions: {
-      external: ['axios'],
+      // external: ['axios'], // Uncomment only if you load axios via CDN
     },
   },
   darkMode: 'class',
-  plugins: [react(), 
-    tailwindcss()],
+  plugins: [react(), tailwindcss()],
   server: {
     proxy: {
-      '/api': 'http://localhost:3000', // or whatever your backend runs on
+      '/api': {
+        target: 'https://tvboxdbackend.onrender.com', // Replace with your actual backend
+        changeOrigin: true,
+      },
     },
   },
 })

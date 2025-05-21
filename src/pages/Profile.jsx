@@ -14,8 +14,6 @@ export default function Profile() {
   const { user } = useContext(AuthContext);
   const username = useParams().username ? useParams().username : user.user.username ;
   const navigate = useNavigate();
-  console.log("user:" + username);
-  console.log(user.user.username);
 
   const token = localStorage.getItem('token');
 
@@ -38,7 +36,6 @@ export default function Profile() {
           headers: { Authorization: `Bearer ${token}` },
         });
         for (let i = 0; i < followersRes.data.length; i++) {
-          console.log(followersRes.data[i]);
           if (followersRes.data[i].username == user.user.username) {
             setIsFollowing(true);
           }
