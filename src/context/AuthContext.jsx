@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (token) {
-      api.get('/api/users/me', {
+      api.get('/users/me', {
         headers: {
           Authorization: `Bearer ${token}`,
         },

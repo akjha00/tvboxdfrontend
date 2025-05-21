@@ -13,7 +13,7 @@ export default function AddToWatchlist({ showId, onAdded }) {
 
     try {
       await api.post(
-        `/api/watchlist/${showId}`,
+        `/watchlist/${showId}`,
         {
           current_season: parseInt(season),
           current_episode: parseInt(episode),

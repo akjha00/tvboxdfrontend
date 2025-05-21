@@ -16,7 +16,7 @@ export default function AddReviewForm({ showId, onReviewAdded }) {
     try {
       const token = localStorage.getItem('token');
       const res = await api.post(
-        `/api/ratings`,
+        `/ratings`,
         { showId, rating, content },
         { headers: { Authorization: `Bearer ${token}` } }
       );

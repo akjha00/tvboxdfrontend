@@ -20,19 +20,19 @@ export default function Profile() {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const profileRes = await api.get(`/api/profile/${username}`, {
+        const profileRes = await api.get(`/profile/${username}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        const reviewsRes = await api.get(`/api/ratings/user/${profileRes.data.user_id}`, {
+        const reviewsRes = await api.get(`/ratings/user/${profileRes.data.user_id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        const followingRes = await api.get(`/api/social/following/${profileRes.data.user_id}`, {
+        const followingRes = await api.get(`/social/following/${profileRes.data.user_id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        const followersRes = await api.get(`/api/social/followers/${profileRes.data.user_id}`, {
+        const followersRes = await api.get(`/social/followers/${profileRes.data.user_id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         for (let i = 0; i < followersRes.data.length; i++) {
@@ -57,7 +57,7 @@ export default function Profile() {
 
     try {
       const res = await api.post(
-        `/api/social/follow/${profile.user_id}`, null, {
+        `/social/follow/${profile.user_id}`, null, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -70,7 +70,7 @@ export default function Profile() {
 
     try {
       const res = await api.delete(
-        `/api/social/unfollow/${profile.user_id}`, {
+        `/social/unfollow/${profile.user_id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
       

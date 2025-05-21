@@ -20,7 +20,7 @@ export default function ShowPage() {
   useEffect(() => {
     const fetchShow = async () => {
       try {
-        const res = await api.get(`/api/shows/${id}`);
+        const res = await api.get(`/shows/${id}`);
         setShow(res.data);
       } catch (err) {
         console.error('Failed to fetch show:', err);
@@ -29,7 +29,7 @@ export default function ShowPage() {
 
     const fetchReviews = async () => {
       try {
-        const res = await api.get(`/api/ratings/show/${id}`);
+        const res = await api.get(`/ratings/show/${id}`);
         setReviews(res.data);
         if (user) {
           const userHasReviewed = res.data.some(
@@ -48,7 +48,7 @@ export default function ShowPage() {
 
   async function fetchReviewsAgain(showId) {
     try {
-      const res = await api.get(`/api/ratings/show/${showId}`);
+      const res = await api.get(`/ratings/show/${showId}`);
       setHasReviewed(true);
       return res.data; // array of reviews
     } catch (err) {

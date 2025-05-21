@@ -12,11 +12,11 @@ const RegisterForm = ({ onLogin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await api.post('/api/users/register', form);
+      const res = await api.post('/users/register', form);
       onLogin(res.data.token);
       if (res.data.token) {
         // Immediately create profile
-        await api.post('/api/profile', {
+        await api.post('/profile', {
           username: res.data.username,
           bio: 'No bio yet',
           photo_url: '',

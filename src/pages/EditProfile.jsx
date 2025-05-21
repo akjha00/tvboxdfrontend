@@ -17,10 +17,10 @@ export default function EditProfile() {
     // Fetch current user profile info
     const fetchProfile = async () => {
       try {
-        const profileRes = await api.get('/api/profile/me', {
+        const profileRes = await api.get('/profile/me', {
             headers: { Authorization: `Bearer ${token}` },
         });
-        const reviewsRes = await api.get(`/api/ratings/user/${user.user.id}`, {
+        const reviewsRes = await api.get(`/ratings/user/${user.user.id}`, {
             headers: { Authorization: `Bearer ${token}` },
         });
         setUsername(profileRes.data.username);
@@ -39,7 +39,7 @@ export default function EditProfile() {
     e.preventDefault();
     try {
       await api.patch(
-        '/api/profile',
+        '/profile',
         { username, bio, avatar_url: photoUrl },
         {
           headers: {

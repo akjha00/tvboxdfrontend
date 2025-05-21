@@ -12,7 +12,7 @@ export default function ActivityPage() {
     const fetchActivity = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await api.get('/api/social/feed', {
+        const res = await api.get('/social/feed', {
             headers: {
               Authorization: `Bearer ${token}`,
             },

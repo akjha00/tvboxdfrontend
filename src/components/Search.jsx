@@ -13,7 +13,7 @@ export default function Search({ onSelect }) {
     e.preventDefault();
     setError('');
     try {
-      const res = await api.get(`/api/search?query=${encodeURIComponent(query)}`);
+      const res = await api.get(`/search?query=${encodeURIComponent(query)}`);
       setResults(res.data);
     } catch (err) {
       setError('Error fetching search results');
@@ -23,7 +23,7 @@ export default function Search({ onSelect }) {
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       if (query.trim()) {
-        api.get(`/api/search?query=${encodeURIComponent(query)}`)
+        api.get(`/search?query=${encodeURIComponent(query)}`)
           .then(res => {
             setResults(res.data);
             setShowDropdown(true);
