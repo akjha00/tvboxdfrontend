@@ -4,9 +4,9 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   build: {
-    rollupOptions: {
+    /*rollupOptions: {
       // external: ['axios'], // Uncomment only if you load axios via CDN
-    },
+    },*/
   },
   darkMode: 'class',
   plugins: [react(), tailwindcss()],
