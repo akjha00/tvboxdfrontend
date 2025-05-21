@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/axios';
 import { AuthContext } from '../context/AuthContext';
 import AddReviewForm from '../components/AddReviewForm';
 import AddToWatchlist from '../components/AddToWatchlist';
@@ -20,7 +20,7 @@ export default function ShowPage() {
   useEffect(() => {
     const fetchShow = async () => {
       try {
-        const res = await axios.get(`/api/shows/${id}`);
+        const res = await api.get(`/api/shows/${id}`);
         setShow(res.data);
       } catch (err) {
         console.error('Failed to fetch show:', err);
@@ -29,7 +29,7 @@ export default function ShowPage() {
 
     const fetchReviews = async () => {
       try {
-        const res = await axios.get(`/api/ratings/show/${id}`);
+        const res = await api.get(`/api/ratings/show/${id}`);
         setReviews(res.data);
         if (user) {
           const userHasReviewed = res.data.some(
@@ -48,7 +48,7 @@ export default function ShowPage() {
 
   async function fetchReviewsAgain(showId) {
     try {
-      const res = await axios.get(`/api/ratings/show/${showId}`);
+      const res = await api.get(`/api/ratings/show/${showId}`);
       setHasReviewed(true);
       return res.data; // array of reviews
     } catch (err) {

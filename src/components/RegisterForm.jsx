@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import { AuthContext } from '../context/AuthContext';
 
 const RegisterForm = ({ onLogin }) => {
@@ -12,11 +12,11 @@ const RegisterForm = ({ onLogin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('/api/users/register', form);
+      const res = await api.post('/api/users/register', form);
       onLogin(res.data.token);
       if (res.data.token) {
         // Immediately create profile
-        await axios.post('/api/profile', {
+        await api.post('/api/profile', {
           username: res.data.username,
           bio: 'No bio yet',
           photo_url: '',

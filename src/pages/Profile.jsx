@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/axios';
 import { AuthContext } from '../context/AuthContext';
 import FloatingEditButton from '../components/FloatingEditButton';
 import FloatingHomeButton from '../components/FloatingHomeButton';
@@ -20,19 +20,19 @@ export default function Profile() {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const profileRes = await axios.get(`/api/profile/${username}`, {
+        const profileRes = await api.get(`/api/profile/${username}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        const reviewsRes = await axios.get(`/api/ratings/user/${profileRes.data.user_id}`, {
+        const reviewsRes = await api.get(`/api/ratings/user/${profileRes.data.user_id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        const followingRes = await axios.get(`/api/social/following/${profileRes.data.user_id}`, {
+        const followingRes = await api.get(`/api/social/following/${profileRes.data.user_id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        const followersRes = await axios.get(`/api/social/followers/${profileRes.data.user_id}`, {
+        const followersRes = await api.get(`/api/social/followers/${profileRes.data.user_id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         for (let i = 0; i < followersRes.data.length; i++) {
@@ -56,7 +56,7 @@ export default function Profile() {
   const follow = async () => {
 
     try {
-      const res = await axios.post(
+      const res = await api.post(
         `/api/social/follow/${profile.user_id}`, null, {
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -69,7 +69,7 @@ export default function Profile() {
   const unfollow = async () => {
 
     try {
-      const res = await axios.delete(
+      const res = await api.delete(
         `/api/social/unfollow/${profile.user_id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });

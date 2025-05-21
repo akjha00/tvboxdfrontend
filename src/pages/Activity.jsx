@@ -1,5 +1,5 @@
 import { act, useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import Search from '../components/Search';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ export default function ActivityPage() {
     const fetchActivity = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('/api/social/feed', {
+        const res = await api.get('/api/social/feed', {
             headers: {
               Authorization: `Bearer ${token}`,
             },

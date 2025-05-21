@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import axios from 'axios';
+import api from '../api/axios';
 import { useNavigate } from 'react-router-dom';
 
 export default function EditProfile() {
@@ -17,10 +17,10 @@ export default function EditProfile() {
     // Fetch current user profile info
     const fetchProfile = async () => {
       try {
-        const profileRes = await axios.get('/api/profile/me', {
+        const profileRes = await api.get('/api/profile/me', {
             headers: { Authorization: `Bearer ${token}` },
         });
-        const reviewsRes = await axios.get(`/api/ratings/user/${user.user.id}`, {
+        const reviewsRes = await api.get(`/api/ratings/user/${user.user.id}`, {
             headers: { Authorization: `Bearer ${token}` },
         });
         setUsername(profileRes.data.username);
@@ -38,7 +38,7 @@ export default function EditProfile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(
+      await api.patch(
         '/api/profile',
         { username, bio, avatar_url: photoUrl },
         {

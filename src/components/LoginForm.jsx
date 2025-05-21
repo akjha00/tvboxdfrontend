@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 
 export default function LoginForm({ onLogin }) {
   const [identifier, setIdentifier] = useState('');
@@ -9,7 +9,7 @@ export default function LoginForm({ onLogin }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('/api/users/login', { identifier, password });
+      const res = await api.post('/api/users/login', { identifier, password });
       //localStorage.setItem('token', res.data.token);
       onLogin(res.data.token);
     } catch (err) {

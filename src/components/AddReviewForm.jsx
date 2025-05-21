@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 
 export default function AddReviewForm({ showId, onReviewAdded }) {
   const [rating, setRating] = useState('');
@@ -15,7 +15,7 @@ export default function AddReviewForm({ showId, onReviewAdded }) {
 
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.post(
+      const res = await api.post(
         `/api/ratings`,
         { showId, rating, content },
         { headers: { Authorization: `Bearer ${token}` } }

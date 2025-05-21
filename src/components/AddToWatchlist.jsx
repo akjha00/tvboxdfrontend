@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 
 export default function AddToWatchlist({ showId, onAdded }) {
   const [season, setSeason] = useState('');
@@ -12,7 +12,7 @@ export default function AddToWatchlist({ showId, onAdded }) {
     if (!token) return alert('You must be logged in');
 
     try {
-      await axios.post(
+      await api.post(
         `/api/watchlist/${showId}`,
         {
           current_season: parseInt(season),
