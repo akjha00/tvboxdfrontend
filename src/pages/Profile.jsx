@@ -57,7 +57,7 @@ export default function Profile() {
 
     try {
       const res = await api.post(
-        `/social/follow/${profile.user_id}`, null, {
+        `/social/follow/${profile.user_id}`, {}, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
